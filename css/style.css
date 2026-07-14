@@ -1,23 +1,26 @@
 :root {
-  /* NES Super Mario Bros. palette */
-  --sky: #5c94fc;
+  /* From site icon */
+  --sky: #e52521;
   --cloud: #fcfcfc;
+  --cloud-shade: #7ec8ff;
+  --grass: #00b800;
+  --grass-deep: #008800;
+  --dirt: #a05a28;
+  --dirt-hi: #c48a48;
+  --dirt-deep: #6b3a14;
+  --dirt-stone: #8c6240;
   --bush: #00a800;
-  --bush-deep: #007c00;
-  --brick: #c84c0c;
-  --brick-hi: #fc9838;
-  --brick-line: #000000;
-  --ground: #c84c0c;
-  --ground-deep: #8a3408;
-  --mario-red: #e52521;
-  --coin: #fbd000;
-  --coin-deep: #e39f00;
-  --block: #fc9838;
-  --block-deep: #e45c10;
-  --panel: #fce4a8;
+  --bush-deep: #007000;
+  --pipe: #00a800;
+  --pipe-hi: #3cdc3c;
+  --pipe-deep: #007000;
+  --metal: #d8d8d8;
+  --metal-hi: #f4f4f4;
+  --metal-deep: #8a8a8a;
   --ink: #000000;
-  --px: 8px;
-  --dot: 5px;
+  --wood: #b06a28;
+  --px: 10px;
+  --dot: 6px;
   color-scheme: light;
 }
 
@@ -44,8 +47,8 @@ body {
 
 /* ===== DOM pixel text ===== */
 .px-text {
-  --dot: 5px;
-  --gap-x: 4px;
+  --dot: 6px;
+  --gap-x: 5px;
   --gap-y: 8px;
   display: inline-flex;
   flex-wrap: wrap;
@@ -56,19 +59,14 @@ body {
   color: var(--ink);
 }
 
-.px-text--sm {
-  --dot: 5px;
-  --gap-x: 4px;
-}
-
 .px-text--lg {
   --dot: 8px;
   --gap-x: 6px;
 }
 
 .px-text--xl {
-  --dot: 9px;
-  --gap-x: 7px;
+  --dot: 10px;
+  --gap-x: 8px;
 }
 
 .px-char {
@@ -87,31 +85,49 @@ body {
 }
 
 .px-text--brand {
-  color: var(--mario-red);
+  color: var(--metal-hi);
+  filter:
+    drop-shadow(0 var(--dot) 0 var(--ink))
+    drop-shadow(var(--dot) 0 0 var(--ink))
+    drop-shadow(calc(var(--dot) * -1) 0 0 var(--ink))
+    drop-shadow(0 calc(var(--dot) * -1) 0 var(--ink));
   animation: brand-pop 1.2s steps(2) infinite alternate;
-  filter: drop-shadow(calc(var(--dot) * 1) calc(var(--dot) * 1) 0 var(--ink));
 }
 
 .tool-name.px-text {
-  color: var(--mario-red);
+  color: var(--ink);
 }
 
-/* ===== Pixel sky / world ===== */
-.sky {
+/* ===== World (icon scene) ===== */
+.world {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: var(--sky);
-  /* flat NES band — pure color blocks, no gradient */
-  background-image:
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.sky {
+  position: relative;
+  background:
+    /* chunky red pixel dither / bands */
+    repeating-linear-gradient(
+      90deg,
+      #e52521 0,
+      #e52521 calc(var(--px) - 1px),
+      #d41f1b calc(var(--px) - 1px),
+      #d41f1b var(--px)
+    ),
     repeating-linear-gradient(
       0deg,
-      transparent 0,
-      transparent calc(var(--px) * 2 - 1px),
-      rgba(0, 0, 0, 0.035) calc(var(--px) * 2 - 1px),
-      rgba(0, 0, 0, 0.035) calc(var(--px) * 2)
+      #e52521 0,
+      #e52521 calc(var(--px) - 1px),
+      #ef3a30 calc(var(--px) - 1px),
+      #ef3a30 var(--px)
     );
+  background-blend-mode: multiply;
+  background-color: var(--sky);
 }
 
 .cloud {
@@ -119,7 +135,6 @@ body {
   width: var(--px);
   height: var(--px);
   background: transparent;
-  /* classic Mario cloud made of pixel blocks */
   box-shadow:
     calc(var(--px) * 2) 0 0 0 var(--cloud),
     calc(var(--px) * 3) 0 0 0 var(--cloud),
@@ -131,48 +146,120 @@ body {
     calc(var(--px) * 5) var(--px) 0 0 var(--cloud),
     0 calc(var(--px) * 2) 0 0 var(--cloud),
     calc(var(--px) * 1) calc(var(--px) * 2) 0 0 var(--cloud),
-    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--cloud),
-    calc(var(--px) * 3) calc(var(--px) * 2) 0 0 var(--cloud),
+    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--cloud-shade),
+    calc(var(--px) * 3) calc(var(--px) * 2) 0 0 var(--cloud-shade),
     calc(var(--px) * 4) calc(var(--px) * 2) 0 0 var(--cloud),
     calc(var(--px) * 5) calc(var(--px) * 2) 0 0 var(--cloud),
     calc(var(--px) * 6) calc(var(--px) * 2) 0 0 var(--cloud),
-    calc(var(--px) * 1) calc(var(--px) * 3) 0 0 var(--cloud),
-    calc(var(--px) * 2) calc(var(--px) * 3) 0 0 var(--cloud),
-    calc(var(--px) * 3) calc(var(--px) * 3) 0 0 var(--cloud),
-    calc(var(--px) * 4) calc(var(--px) * 3) 0 0 var(--cloud),
-    calc(var(--px) * 5) calc(var(--px) * 3) 0 0 var(--cloud);
-  animation: cloud-drift 18s steps(24) infinite;
+    calc(var(--px) * 1) calc(var(--px) * 3) 0 0 var(--cloud-shade),
+    calc(var(--px) * 2) calc(var(--px) * 3) 0 0 var(--cloud-shade),
+    calc(var(--px) * 3) calc(var(--px) * 3) 0 0 var(--cloud-shade),
+    calc(var(--px) * 4) calc(var(--px) * 3) 0 0 var(--cloud-shade),
+    calc(var(--px) * 5) calc(var(--px) * 3) 0 0 var(--cloud-shade);
+  animation: cloud-drift 20s steps(20) infinite;
 }
 
 .cloud-a {
   top: 12%;
-  left: 6%;
+  left: 8%;
 }
 
 .cloud-b {
-  top: 20%;
-  right: 18%;
-  animation-duration: 24s;
+  top: 18%;
+  right: 12%;
   animation-direction: reverse;
-  transform: scale(1.15);
-  transform-origin: top left;
+  animation-duration: 26s;
 }
 
-.cloud-c {
-  top: 8%;
-  left: 58%;
-  animation-duration: 20s;
-  transform: scale(0.85);
-  transform-origin: top left;
+.stage {
+  position: relative;
+  height: calc(var(--px) * 14);
+}
+
+.grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(var(--px) * 3);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--grass) 0,
+      var(--grass) calc(var(--px) * 2),
+      var(--grass-deep) calc(var(--px) * 2),
+      var(--grass-deep) calc(var(--px) * 3),
+      var(--grass) calc(var(--px) * 3),
+      var(--grass) calc(var(--px) * 5),
+      var(--grass-deep) calc(var(--px) * 5),
+      var(--grass-deep) calc(var(--px) * 6)
+    );
+  box-shadow:
+    0 calc(var(--px) * 0.5) 0 0 var(--grass-deep),
+    inset 0 calc(var(--px) * -0.5) 0 0 rgba(0, 0, 0, 0.15);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 70%,
+    96% 100%,
+    90% 70%,
+    84% 100%,
+    78% 70%,
+    72% 100%,
+    66% 70%,
+    60% 100%,
+    54% 70%,
+    48% 100%,
+    42% 70%,
+    36% 100%,
+    30% 70%,
+    24% 100%,
+    18% 70%,
+    12% 100%,
+    6% 70%,
+    0 100%
+  );
+}
+
+.dirt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--px) * 2.5);
+  bottom: 0;
+  background-color: var(--dirt);
+  background-image:
+    linear-gradient(var(--ink) 0 0),
+    linear-gradient(var(--ink) 0 0),
+    linear-gradient(var(--dirt-hi) 0 0),
+    linear-gradient(var(--dirt-stone) 0 0),
+    linear-gradient(var(--dirt-deep) 0 0);
+  background-size:
+    calc(var(--px) * 4) 2px,
+    2px calc(var(--px) * 4),
+    calc(var(--px) * 1.5) calc(var(--px) * 1),
+    calc(var(--px) * 2) calc(var(--px) * 1.5),
+    calc(var(--px) * 4) calc(var(--px) * 4);
+  background-position:
+    0 calc(var(--px) * 4 - 2px),
+    calc(var(--px) * 4 - 2px) 0,
+    var(--px) calc(var(--px) * 1),
+    calc(var(--px) * 2.2) calc(var(--px) * 2.4),
+    0 0;
+  background-repeat: repeat;
+  border-top: 3px solid var(--ink);
 }
 
 .bush {
   position: absolute;
-  bottom: calc(var(--px) * 8);
+  left: 6%;
+  bottom: calc(var(--px) * 11);
   width: var(--px);
   height: var(--px);
+  z-index: 2;
   background: transparent;
   box-shadow:
+    /* silhouette + eyes */
     calc(var(--px) * 2) 0 0 0 var(--bush),
     calc(var(--px) * 3) 0 0 0 var(--bush),
     calc(var(--px) * 1) var(--px) 0 0 var(--bush),
@@ -181,89 +268,80 @@ body {
     calc(var(--px) * 4) var(--px) 0 0 var(--bush),
     0 calc(var(--px) * 2) 0 0 var(--bush),
     calc(var(--px) * 1) calc(var(--px) * 2) 0 0 var(--bush),
-    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--bush-deep),
-    calc(var(--px) * 3) calc(var(--px) * 2) 0 0 var(--bush),
+    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--ink),
+    calc(var(--px) * 3) calc(var(--px) * 2) 0 0 var(--ink),
     calc(var(--px) * 4) calc(var(--px) * 2) 0 0 var(--bush),
     calc(var(--px) * 5) calc(var(--px) * 2) 0 0 var(--bush),
     calc(var(--px) * 1) calc(var(--px) * 3) 0 0 var(--bush-deep),
-    calc(var(--px) * 2) calc(var(--px) * 3) 0 0 var(--bush-deep),
+    calc(var(--px) * 2) calc(var(--px) * 3) 0 0 var(--bush),
     calc(var(--px) * 3) calc(var(--px) * 3) 0 0 var(--bush),
     calc(var(--px) * 4) calc(var(--px) * 3) 0 0 var(--bush-deep);
-}
-
-.bush-a {
-  left: 4%;
-  transform: scale(1.4);
+  transform: scale(1.6);
   transform-origin: bottom left;
 }
 
-.bush-b {
-  right: 10%;
-  transform: scale(1.1) scaleX(-1);
-  transform-origin: bottom right;
-}
-
-.ground {
+.pipe {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: calc(var(--px) * 8);
-  background-color: var(--brick);
-  background-image:
-    /* brick mortar grid */
-    linear-gradient(var(--brick-line) 0 0),
-    linear-gradient(var(--brick-line) 0 0),
-    linear-gradient(var(--brick-hi) 0 0),
-    linear-gradient(var(--ground-deep) 0 0);
-  background-size:
-    calc(var(--px) * 4) 2px,
-    2px calc(var(--px) * 4),
-    calc(var(--px) * 2) calc(var(--px) * 1),
-    calc(var(--px) * 4) calc(var(--px) * 4);
-  background-position:
-    0 calc(var(--px) * 4 - 2px),
-    calc(var(--px) * 4 - 2px) 0,
-    var(--px) var(--px),
-    0 0;
-  background-repeat: repeat;
-  border-top: calc(var(--px) / 2) solid var(--ink);
-  box-shadow: inset 0 calc(var(--px) / 2) 0 0 var(--brick-hi);
+  right: 8%;
+  bottom: calc(var(--px) * 11.2);
+  width: calc(var(--px) * 5);
+  z-index: 2;
+  display: grid;
+  gap: 0;
 }
 
+.pipe-lip {
+  height: calc(var(--px) * 2.2);
+  margin: 0 calc(var(--px) * -0.6);
+  background:
+    linear-gradient(
+      90deg,
+      var(--ink) 0 3px,
+      var(--pipe-hi) 3px calc(var(--px) * 1.2),
+      var(--pipe) calc(var(--px) * 1.2) calc(100% - var(--px) * 1.2),
+      var(--pipe-deep) calc(100% - var(--px) * 1.2) calc(100% - 3px),
+      var(--ink) calc(100% - 3px)
+    );
+  border: 3px solid var(--ink);
+  box-shadow: inset 0 calc(var(--px) * -0.4) 0 0 var(--pipe-deep);
+}
+
+.pipe-body {
+  height: calc(var(--px) * 7);
+  background:
+    linear-gradient(
+      90deg,
+      var(--ink) 0 3px,
+      var(--pipe-hi) 3px calc(var(--px) * 1.1),
+      var(--pipe) calc(var(--px) * 1.1) calc(100% - var(--px) * 1.1),
+      var(--pipe-deep) calc(100% - var(--px) * 1.1) calc(100% - 3px),
+      var(--ink) calc(100% - 3px)
+    );
+  border-left: 3px solid var(--ink);
+  border-right: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+
+/* ===== Content layout ===== */
 .shell {
   position: relative;
   z-index: 1;
-  width: min(40rem, calc(100% - 2rem));
+  width: min(34rem, calc(100% - 2rem));
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 3rem 0 calc(var(--px) * 12);
+  gap: 2.25rem;
+  padding: 3rem 0 calc(var(--px) * 18);
+  text-align: center;
 }
 
 .intro {
   display: grid;
-  gap: 0.85rem;
-  justify-items: start;
-}
-
-.badge {
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 0.65rem;
-  background: var(--block);
-  box-shadow:
-    var(--px) 0 0 0 var(--ink),
-    calc(var(--px) * -1) 0 0 0 var(--ink),
-    0 var(--px) 0 0 var(--ink),
-    0 calc(var(--px) * -1) 0 0 var(--ink),
-    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--ink),
-    inset calc(var(--px) * -1) calc(var(--px) * -1) 0 0 var(--block-deep);
+  justify-items: center;
+  gap: 0.75rem;
 }
 
 .brand {
@@ -271,47 +349,69 @@ body {
 }
 
 .tools {
+  width: 100%;
   display: grid;
-  gap: 1.1rem;
+  gap: calc(var(--px) * 1.2);
 }
 
 .tool {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.35rem 1.25rem;
+  padding: calc(var(--px) * 1.6) calc(var(--px) * 1.4);
   text-decoration: none;
   color: inherit;
-  background: var(--panel);
+  /* metal plate like the wrench */
+  background-color: var(--metal);
+  background-image:
+    linear-gradient(var(--ink) 0 0),
+    linear-gradient(var(--ink) 0 0),
+    linear-gradient(var(--metal-hi) 0 0),
+    linear-gradient(var(--metal-deep) 0 0);
+  background-size:
+    calc(var(--px) * 2) 2px,
+    2px calc(var(--px) * 2),
+    calc(var(--px) * 1) calc(var(--px) * 0.7),
+    calc(var(--px) * 2) calc(var(--px) * 2);
+  background-position:
+    0 calc(var(--px) * 2 - 2px),
+    calc(var(--px) * 2 - 2px) 0,
+    calc(var(--px) * 0.5) calc(var(--px) * 0.4),
+    0 0;
+  background-repeat: repeat;
   box-shadow:
-    var(--px) 0 0 0 var(--ink),
-    calc(var(--px) * -1) 0 0 0 var(--ink),
-    0 var(--px) 0 0 var(--ink),
-    0 calc(var(--px) * -1) 0 0 var(--ink),
-    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--ink);
+    3px 0 0 0 var(--ink),
+    -3px 0 0 0 var(--ink),
+    0 3px 0 0 var(--ink),
+    0 -3px 0 0 var(--ink),
+    6px 6px 0 0 var(--ink),
+    inset 0 -6px 0 0 rgba(0, 0, 0, 0.12),
+    inset 0 4px 0 0 rgba(255, 255, 255, 0.35);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .tool:hover {
-    background: var(--coin);
-    transform: translate(calc(var(--px) * -1), calc(var(--px) * -1));
+    background-color: #f0d060;
+    background-image:
+      linear-gradient(var(--ink) 0 0),
+      linear-gradient(var(--ink) 0 0),
+      linear-gradient(#fff2a8 0 0),
+      linear-gradient(#c49a20 0 0);
+    transform: translate(-3px, -3px);
     box-shadow:
-      var(--px) 0 0 0 var(--ink),
-      calc(var(--px) * -1) 0 0 0 var(--ink),
-      0 var(--px) 0 0 var(--ink),
-      0 calc(var(--px) * -1) 0 0 var(--ink),
-      calc(var(--px) * 3) calc(var(--px) * 3) 0 0 var(--ink);
+      3px 0 0 0 var(--ink),
+      -3px 0 0 0 var(--ink),
+      0 3px 0 0 var(--ink),
+      0 -3px 0 0 var(--ink),
+      9px 9px 0 0 var(--ink),
+      inset 0 -6px 0 0 rgba(0, 0, 0, 0.12);
   }
 }
 
 .tool:focus-visible {
   outline: none;
-  background: var(--coin);
-  transform: translate(calc(var(--px) * -1), calc(var(--px) * -1));
-}
-
-.tool-name {
-  text-transform: uppercase;
+  background-color: #f0d060;
+  transform: translate(-3px, -3px);
 }
 
 @keyframes cloud-drift {
@@ -319,7 +419,7 @@ body {
     margin-left: 0;
   }
   to {
-    margin-left: calc(var(--px) * 8);
+    margin-left: calc(var(--px) * 6);
   }
 }
 
@@ -328,15 +428,19 @@ body {
     transform: translateY(0);
   }
   to {
-    transform: translateY(calc(var(--px) * -0.5));
+    transform: translateY(calc(var(--px) * -0.4));
   }
 }
 
 @media (max-width: 560px) {
+  :root {
+    --px: 8px;
+  }
+
   .shell {
-    width: min(100% - 1.25rem, 40rem);
+    width: min(100% - 1.25rem, 34rem);
+    gap: 1.75rem;
     padding-top: 2.5rem;
-    gap: 1.5rem;
   }
 
   .px-text--lg {
@@ -345,12 +449,18 @@ body {
   }
 
   .px-text--xl {
-    --dot: 7px;
-    --gap-x: 5px;
+    --dot: 8px;
+    --gap-x: 6px;
   }
 
-  .tool {
-    padding: 1.15rem 1rem;
+  .bush {
+    transform: scale(1.25);
+  }
+
+  .pipe {
+    right: 4%;
+    transform: scale(0.9);
+    transform-origin: bottom right;
   }
 }
 

@@ -6,33 +6,37 @@
   <title>yhmist</title>
   <meta name="description" content="yhmist · personal tools" />
   <meta name="color-scheme" content="light" />
-  <meta name="theme-color" content="#5C94FC" />
+  <meta name="theme-color" content="#e52521" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="yhmist" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=5" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=5" />
-  <link rel="manifest" href="/site.webmanifest?v=5" />
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=6" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=6" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=6" />
+  <link rel="manifest" href="/site.webmanifest?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 </head>
 <body>
-  <div class="sky" aria-hidden="true">
-    <span class="cloud cloud-a"></span>
-    <span class="cloud cloud-b"></span>
-    <span class="cloud cloud-c"></span>
-    <span class="bush bush-a"></span>
-    <span class="bush bush-b"></span>
-    <span class="ground"></span>
+  <div class="world" aria-hidden="true">
+    <div class="sky">
+      <span class="cloud cloud-a"></span>
+      <span class="cloud cloud-b"></span>
+    </div>
+    <div class="stage">
+      <span class="bush"></span>
+      <span class="pipe">
+        <span class="pipe-lip"></span>
+        <span class="pipe-body"></span>
+      </span>
+      <div class="grass"></div>
+      <div class="dirt"></div>
+    </div>
   </div>
 
   <main class="shell">
     <header class="intro">
-      <p class="badge">
-        <span class="px-text px-text--sm" data-px="1-1"></span>
-      </p>
       <h1 class="brand">
         <span class="px-text px-text--xl px-text--brand" data-px="yhmist"></span>
       </h1>
