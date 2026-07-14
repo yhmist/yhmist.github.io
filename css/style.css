@@ -95,7 +95,7 @@ body {
 }
 
 .tool-name.px-text {
-  color: var(--ink);
+  color: #111111;
 }
 
 /* ===== World (icon scene) ===== */
@@ -229,23 +229,13 @@ body {
   bottom: 0;
   background-color: var(--dirt);
   background-image:
-    linear-gradient(var(--ink) 0 0),
-    linear-gradient(var(--ink) 0 0),
-    linear-gradient(var(--dirt-hi) 0 0),
-    linear-gradient(var(--dirt-stone) 0 0),
-    linear-gradient(var(--dirt-deep) 0 0);
+    linear-gradient(to right, var(--ink) 0 3px, transparent 3px),
+    linear-gradient(to bottom, var(--ink) 0 3px, transparent 3px),
+    linear-gradient(135deg, var(--dirt-hi) 0 25%, transparent 25% 50%, var(--dirt-stone) 50% 60%, transparent 60%);
   background-size:
-    calc(var(--px) * 4) 2px,
-    2px calc(var(--px) * 4),
-    calc(var(--px) * 1.5) calc(var(--px) * 1),
-    calc(var(--px) * 2) calc(var(--px) * 1.5),
+    calc(var(--px) * 4) calc(var(--px) * 4),
+    calc(var(--px) * 4) calc(var(--px) * 4),
     calc(var(--px) * 4) calc(var(--px) * 4);
-  background-position:
-    0 calc(var(--px) * 4 - 2px),
-    calc(var(--px) * 4 - 2px) 0,
-    var(--px) calc(var(--px) * 1),
-    calc(var(--px) * 2.2) calc(var(--px) * 2.4),
-    0 0;
   background-repeat: repeat;
   border-top: 3px solid var(--ink);
 }
@@ -361,24 +351,17 @@ body {
   padding: calc(var(--px) * 1.6) calc(var(--px) * 1.4);
   text-decoration: none;
   color: inherit;
-  /* metal plate like the wrench */
-  background-color: var(--metal);
+  /* metal plate like the wrench — light base, thin pixel grid only */
+  background-color: var(--metal-hi);
   background-image:
-    linear-gradient(var(--ink) 0 0),
-    linear-gradient(var(--ink) 0 0),
-    linear-gradient(var(--metal-hi) 0 0),
-    linear-gradient(var(--metal-deep) 0 0);
+    linear-gradient(to right, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px),
+    linear-gradient(180deg, var(--metal-hi) 0 40%, var(--metal) 40% 100%);
   background-size:
-    calc(var(--px) * 2) 2px,
-    2px calc(var(--px) * 2),
-    calc(var(--px) * 1) calc(var(--px) * 0.7),
-    calc(var(--px) * 2) calc(var(--px) * 2);
-  background-position:
-    0 calc(var(--px) * 2 - 2px),
-    calc(var(--px) * 2 - 2px) 0,
-    calc(var(--px) * 0.5) calc(var(--px) * 0.4),
-    0 0;
-  background-repeat: repeat;
+    calc(var(--px) * 2) calc(var(--px) * 2),
+    calc(var(--px) * 2) calc(var(--px) * 2),
+    100% 100%;
+  background-repeat: repeat, repeat, no-repeat;
   box-shadow:
     3px 0 0 0 var(--ink),
     -3px 0 0 0 var(--ink),
@@ -386,17 +369,16 @@ body {
     0 -3px 0 0 var(--ink),
     6px 6px 0 0 var(--ink),
     inset 0 -6px 0 0 rgba(0, 0, 0, 0.12),
-    inset 0 4px 0 0 rgba(255, 255, 255, 0.35);
+    inset 0 4px 0 0 rgba(255, 255, 255, 0.45);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .tool:hover {
-    background-color: #f0d060;
+    background-color: #ffe56a;
     background-image:
-      linear-gradient(var(--ink) 0 0),
-      linear-gradient(var(--ink) 0 0),
-      linear-gradient(#fff2a8 0 0),
-      linear-gradient(#c49a20 0 0);
+      linear-gradient(to right, rgba(0, 0, 0, 0.16) 0 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 0 2px, transparent 2px),
+      linear-gradient(180deg, #fff2a8 0 45%, #f0d060 45% 100%);
     transform: translate(-3px, -3px);
     box-shadow:
       3px 0 0 0 var(--ink),
@@ -410,7 +392,7 @@ body {
 
 .tool:focus-visible {
   outline: none;
-  background-color: #f0d060;
+  background-color: #ffe56a;
   transform: translate(-3px, -3px);
 }
 
