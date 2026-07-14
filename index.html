@@ -16,13 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=5" />
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=5" />
   <link rel="manifest" href="/site.webmanifest?v=5" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=8" />
 </head>
 <body>
   <div class="sky" aria-hidden="true">
@@ -36,22 +30,39 @@
 
   <main class="shell">
     <header class="intro">
-      <p class="badge">1-1</p>
-      <h1 class="brand">yhmist</h1>
+      <p class="badge">
+        <span class="px-text px-text--sm" data-px="1-1"></span>
+      </p>
+      <h1 class="brand">
+        <span class="px-text px-text--xl px-text--brand" data-px="yhmist"></span>
+      </h1>
     </header>
 
     <nav class="tools" aria-label="工具">
       <a class="tool" href="https://yhmist.github.io/invest/">
-        <span class="tool-name">invest</span>
-        <span class="tool-desc">Russell 1000 月度动量选股 · 信号与回测跟踪</span>
-        <span class="tool-go" aria-hidden="true">GO</span>
+        <span class="tool-name px-text px-text--md" data-px="INVEST"></span>
+        <span
+          class="tool-desc px-text px-text--sm px-text--muted"
+          data-px="Russell 1000 月度动量选股 · 信号与回测跟踪"
+        ></span>
+        <span class="tool-go" aria-hidden="true">
+          <span class="px-text px-text--sm" data-px="GO"></span>
+        </span>
       </a>
       <a class="tool" href="https://yhmist.github.io/english/">
-        <span class="tool-name">english</span>
-        <span class="tool-desc">英语对话跟读 · 点句跳转、点词查释义</span>
-        <span class="tool-go" aria-hidden="true">GO</span>
+        <span class="tool-name px-text px-text--md" data-px="ENGLISH"></span>
+        <span
+          class="tool-desc px-text px-text--sm px-text--muted"
+          data-px="英语对话跟读 · 点句跳转、点词查释义"
+        ></span>
+        <span class="tool-go" aria-hidden="true">
+          <span class="px-text px-text--sm" data-px="GO"></span>
+        </span>
       </a>
     </nav>
   </main>
+
+  <script src="js/glyphs.js?v=8"></script>
+  <script src="js/pixel-text.js?v=8"></script>
 </body>
 </html>
