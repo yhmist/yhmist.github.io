@@ -346,7 +346,7 @@ body {
 .tools {
   width: 100%;
   display: grid;
-  gap: calc(var(--px) * 1.4);
+  gap: calc(var(--px) * 3);
 }
 
 .tool {
