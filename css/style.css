@@ -17,6 +17,10 @@
   --metal: #d8d8d8;
   --metal-hi: #f4f4f4;
   --metal-deep: #8a8a8a;
+  --block: #fc9838;
+  --block-hi: #ffd070;
+  --block-deep: #c45c10;
+  --coin: #fbd000;
   --ink: #000000;
   --wood: #b06a28;
   --px: 10px;
@@ -95,9 +99,10 @@ body {
 }
 
 .tool-name.px-text {
-  color: #111111;
+  color: #000000;
   position: relative;
   z-index: 1;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35));
 }
 
 /* ===== World (icon scene) ===== */
@@ -341,34 +346,96 @@ body {
 .tools {
   width: 100%;
   display: grid;
-  gap: calc(var(--px) * 1.2);
+  gap: calc(var(--px) * 1.4);
 }
 
 .tool {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--px) * 1.6) calc(var(--px) * 1.4);
+  padding: calc(var(--px) * 1.7) calc(var(--px) * 1.5);
   text-decoration: none;
-  color: #111111;
-  background: #f4f4f4;
-  border: 4px solid #000;
-  box-shadow: 6px 6px 0 0 #000;
+  color: #000;
+  /* Mario question / coin block */
+  background:
+    linear-gradient(
+      180deg,
+      var(--block-hi) 0 18%,
+      var(--block) 18% 72%,
+      var(--block-deep) 72% 100%
+    );
+  box-shadow:
+    /* hard pixel outline */
+    var(--px) 0 0 0 var(--ink),
+    calc(var(--px) * -1) 0 0 0 var(--ink),
+    0 var(--px) 0 0 var(--ink),
+    0 calc(var(--px) * -1) 0 0 var(--ink),
+    calc(var(--px) * 2) calc(var(--px) * 2) 0 0 var(--ink),
+    /* top highlight strip */
+    inset 0 calc(var(--px) * 0.6) 0 0 rgba(255, 255, 255, 0.28),
+    /* bottom shade */
+    inset 0 calc(var(--px) * -0.8) 0 0 rgba(0, 0, 0, 0.22);
+}
+
+/* corner studs like ?-block bolts */
+.tool::before,
+.tool::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--px) * 0.9);
+  height: calc(var(--px) * 0.9);
+  background: var(--block-deep);
+  box-shadow:
+    var(--px) 0 0 0 var(--ink),
+    calc(var(--px) * -1) 0 0 0 var(--ink),
+    0 var(--px) 0 0 var(--ink),
+    0 calc(var(--px) * -1) 0 0 var(--ink),
+    inset 0 calc(var(--px) * -0.25) 0 0 rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.tool::before {
+  top: calc(var(--px) * 0.9);
+  left: calc(var(--px) * 0.9);
+}
+
+.tool::after {
+  top: calc(var(--px) * 0.9);
+  right: calc(var(--px) * 0.9);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .tool:hover {
-    background: #ffe56a;
-    transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0 0 #000;
+    background:
+      linear-gradient(
+        180deg,
+        #ffe56a 0 22%,
+        var(--coin) 22% 70%,
+        #e39f00 70% 100%
+      );
+    transform: translate(calc(var(--px) * -0.5), calc(var(--px) * -0.5));
+    box-shadow:
+      var(--px) 0 0 0 var(--ink),
+      calc(var(--px) * -1) 0 0 0 var(--ink),
+      0 var(--px) 0 0 var(--ink),
+      0 calc(var(--px) * -1) 0 0 var(--ink),
+      calc(var(--px) * 2.5) calc(var(--px) * 2.5) 0 0 var(--ink),
+      inset 0 calc(var(--px) * 0.6) 0 0 rgba(255, 255, 255, 0.35),
+      inset 0 calc(var(--px) * -0.8) 0 0 rgba(0, 0, 0, 0.18);
   }
 }
 
 .tool:focus-visible {
   outline: none;
-  background: #ffe56a;
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 0 #000;
+  background:
+    linear-gradient(
+      180deg,
+      #ffe56a 0 22%,
+      var(--coin) 22% 70%,
+      #e39f00 70% 100%
+    );
+  transform: translate(calc(var(--px) * -0.5), calc(var(--px) * -0.5));
 }
 
 @keyframes cloud-drift {
